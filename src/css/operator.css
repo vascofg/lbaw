@@ -25,6 +25,10 @@ div.cart>div.product>button.del {
   float:right;
 }
 
-div.cart>div.product>span.totalprice {
+div.cart>div.product>span.productTotal {
   float:right;
+}
+
+div.cart>div.total {
+  font-weight:bold;
 }

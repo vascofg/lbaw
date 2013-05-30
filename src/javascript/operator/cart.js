@@ -2,7 +2,6 @@ var products = [];
 
 $(document).ready(function(){
 	var cart = $("div.cart");
-	cart.append("<div class=\"total\">Total: <span class=\"totalvalue\">0.00</span></div>");
 	$(document).on("click", "div.products>div.product", function(event) {
     if(products.length==0) //first time
       document.getElementById("submit").disabled=false;
@@ -12,22 +11,21 @@ $(document).ready(function(){
     var name = product.children("span.name").html();
     var price = parseFloat(product.children("span.price").html()).toFixed(2);
     var productOnCart = $("div.cart>div.product[id="+productid+"]");
-    if(productOnCart.length==0)
+    if(productOnCart.length==0) //isn't on cart yet
     {
-    	var clone = product.clone().append("<span class=\"totalprice\">"+price+"</span>\
+      var clonedProduct = product.clone().append("<span class=\"productTotal\">"+price+"</span>\
         <br>\
         <button class=\"icon-minus-sign sub\"></button>\
         <span class = \"quantity\">1</span>\
         <button class=\"icon-plus-sign add\"></button>\
         <button class=\"icon-remove-sign del\"></button>");
-      clone.children("span.picture").remove();
-		  cart.children("h4").after(clone);
-      products.push({'id':productid,'quantity':1,'brandname':brandname,'name':name,'price':price});
-      var totalValue = $("div.cart>div.total>span.totalvalue");
-			totalValue.html((parseFloat(totalValue.html())+price).toFixed(2));
+      clonedProduct.children("span.picture").remove();
+		  cart.children("h4").after(clonedProduct);
+      products.push({'id':productid,'quantity':1,'brandname':brandname,'name':name,'price':parseFloat(price)}); //add to array
+      updateTotal(parseFloat(price), true);
     }
-    else
-      addQuantity(productOnCart);  
+    else //already exists, just update quantity
+      changeQuantity(productOnCart, true);
 	});
 	$(document).on("click", "div.cart>div.product button.del", function(event) {
 		var product = $(this).parent();
@@ -37,11 +35,11 @@ $(document).ready(function(){
 	});
   $(document).on("click", "div.cart>div.product button.add", function(event) {
     var product = $(this).parent();
-    addQuantity(product);
+    changeQuantity(product, true);
   });
   $(document).on("click", "div.cart>div.product button.sub", function(event) {
     var product = $(this).parent();
-    subQuantity(product);
+    changeQuantity(product, false);
   });
   $("button.submit").click(function() {
     var string="";
@@ -52,45 +50,34 @@ $(document).ready(function(){
   });
 });
 
-function addQuantity(product){
+function changeQuantity(product, up){
    var productid = parseInt(product.attr("id"));
    var productInArray = getProductByID(productid);
-   var maxQuantity =  parseInt(product.attr("data-quantity"));
-   if(productInArray['quantity']<maxQuantity)
+   if((!up && productInArray['quantity']>1)||(up && productInArray['quantity']<parseInt(product.attr("data-quantity"))))
    {
    	 var quantityElem = product.children("span.quantity");
-		 var price = parseFloat(product.children("span.price").html());
-		 var totalElem = product.children("span.totalprice");
-		 productInArray['quantity']+=1;
+		 var price = productInArray['price'];
+		 var productTotal = product.children("span.producttotal");
+		 productInArray['quantity']+=(up?1:-1);
 		 quantityElem.html(productInArray['quantity']);
-		 totalElem.html((price*productInArray['quantity']).toFixed(2));
-		 var totalValue = $("div.cart>div.total>span.totalvalue");
-		 totalValue.html((parseFloat(totalValue.html())+price).toFixed(2));
+		 productTotal.html((price*productInArray['quantity']).toFixed(2));
+		 updateTotal(price, up);
    }
-}
-
-function subQuantity(product){
-  var productid = parseInt(product.attr("id"));
-  var productInArray = getProductByID(productid);
-  if(productInArray['quantity']>1)
-  {
-    var quantityElem = product.children("span.quantity");
-    var price = parseFloat(product.children("span.price").html());
-    var totalElem = product.children("span.totalprice");
-    productInArray['quantity']-=1;
-    quantityElem.html(productInArray['quantity']);
-    totalElem.html((price*productInArray['quantity']).toFixed(2));
-    updateTotal();
-    var totalValue = $("div.cart>div.total>span.totalvalue");
-		totalValue.html((parseFloat(totalValue.html())-price).toFixed(2));
-  }
 }
 
 function removeProduct(product){
   var productid = parseInt(product.attr("id"));
+  var productInArray = getProductByID(productid);
+  var price = productInArray['price'];
+  var quantity = productInArray['quantity'];
   products = removeItemByID(productid);
+  updateTotal(price*quantity, false);
   product.remove();
-  updateTotal();
+}
+
+function updateTotal(value, up){
+  var total = $("div.cart>div.total>span.total");
+	total.html((parseFloat(total.html())+value*(up?1:-1)).toFixed(2));
 }
 
 function getProductByID(id){
@@ -99,9 +86,4 @@ function getProductByID(id){
 
 function removeItemByID(id){
   return $.grep(products, function(e){ return e.id !== id; });
-}
-
-function updateTotal(price){
-  var totalValue = $("div.cart>div.total>span.totalvalue");
-	totalValue.html((parseFloat(totalValue.html())+price).toFixed(2));
 }
