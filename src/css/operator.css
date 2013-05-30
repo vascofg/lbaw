@@ -1,0 +1,30 @@
+div.products>div.product {
+  display:inline-block;
+  border:2px solid;
+  margin:2px;
+  padding:2px;
+  cursor:hand;
+  cursor:pointer;
+}
+
+div.cart>div.product {
+  clear:right;
+  border:2px solid;
+  margin:2px;
+  padding:2px;
+}
+
+div.cart>div.product>button {
+  color:inherit;
+  background-color: transparent;
+  border-color: transparent;
+  outline: 0;
+}
+
+div.cart>div.product>button.del {
+  float:right;
+}
+
+div.cart>div.product>span.totalprice {
+  float:right;
+}
