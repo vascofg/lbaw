@@ -1,1 +1,3 @@
 templates_c/
+common/init.php
+common/session.php
