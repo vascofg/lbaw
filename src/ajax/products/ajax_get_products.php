@@ -2,7 +2,7 @@
 	// initialize
   include_once('../../common/init.php');
   
-  if (!isLoggedInAdmin())
+  if (!isLoggedInAdmin() && !isLoggedInOperator())
 		redirect('');
 		
 	else {
