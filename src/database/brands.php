@@ -15,6 +15,31 @@
     return $stmt->fetchAll();
   }
   
+  function getAllBrandsUsagePage($pagenr) {
+    global $db;
+    global $pagesize;
+    $stmt = $db->prepare("SELECT brand.brandid, brand.name, count(product.brandid) as usage, count(*) OVER() AS count FROM product RIGHT JOIN brand on (brand.brandid = product.brandid) GROUP BY brand.name, brand.brandid ORDER BY count(product.brandid)=0 DESC, brand.name LIMIT :pagesz OFFSET :pagenr");
+    $stmt->execute(array(pagesz=>$pagesize,pagenr=>$pagesize*$pagenr));
+    return $stmt->fetchAll();
+  }
+  
+  function searchBrandsUsagePage($search, $pagenr) {
+  	global $db;
+    global $pagesize;
+  	$searcharray = explode(" ",$search);
+  	$search = str_replace(" ","|",$search);
+  	$search = "(".$search.")";
+  	$searchwhole="^".$search."$";
+    //TODO: Acentos
+  	//Vale mais uma match pela palavra inteira
+  	$stmt = $db->prepare("
+  	SELECT brand.brandid, brand.name, count(product.brandid) as usage, count(*) OVER() as count
+				  ,(case when brand.name ~* ? then 1 else 0 end) +
+				  (case when brand.name ~* ? then 2 else 0 end) as priority FROM product RIGHT JOIN brand on (brand.brandid = product.brandid) where brand.name ~* ? GROUP BY brand.name, brand.brandid ORDER BY priority DESC, brand.name LIMIT ? OFFSET ?");
+  	$stmt->execute(array($search,$searchwhole,$search,$pagesize,$pagesize*$pagenr));
+  	return ($stmt->fetchAll());
+  }
+  
   function addBrand($name) {
 	global $db;
 	try {

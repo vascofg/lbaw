@@ -11,10 +11,11 @@
 		include_once($BASE_PATH . 'database/brands.php');
 
 		// fetch data
-		$brands = getAllBrandsUsage();
+		$brands = getAllBrandsUsagePage(0);
 		
 		// send data to smarty
 		$smarty->assign('brands', $brands);
+		$smarty->assign('numpages', ceil($brands[0]['count']/$pagesize));
 		
 		// display smarty template
 		$smarty->display('manager/brands/list_brands.tpl');

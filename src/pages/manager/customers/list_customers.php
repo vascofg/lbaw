@@ -11,10 +11,11 @@
 		include_once($BASE_PATH . 'database/customers.php');
 
 		// fetch data
-		$customers = getAllCustomers();
+		$customers = getAllCustomersPage(0);
 		
 		// send data to smarty
 		$smarty->assign('customers', $customers);
+		$smarty->assign('numpages', ceil($customers[0]['count']/$pagesize));
 		
 		// display smarty template
 		$smarty->display('manager/customers/list_customers.tpl');

@@ -20,7 +20,7 @@
       	$products = getAllProductsPage($pagenr);
       echo json_encode(array("numpages"=>ceil($products[0]['count']/$pagesize),"products"=>$products));
     }
-    else //if parameter empty use getAllProducts (more efficient)
+    else
     {
     	if($search)
       	$products = searchProduct($search);
