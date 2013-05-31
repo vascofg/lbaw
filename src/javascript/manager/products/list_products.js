@@ -19,7 +19,7 @@ function getProducts(page, first){
 					else
           {
 						for(var i in products)
-							tablebody.append('<tr><td>'+products[i].brandname+'</td><td>'+products[i].name+'</td><td>'+products[i].price+'€</td><td>'+products[i].quantity+'</td><td><a href="../../pages/manager/products/view_product.php?id='+products[i].productid+'"><i class="icon-th-list"></i></a></td></tr>');
+							tablebody.append('<tr><td>'+products[i].brandname+'</td><td>'+products[i].name+'</td><td>'+products[i].price+'€</td><td>'+products[i].quantity+'</td><td><a href="../../../pages/manager/products/view_product.php?id='+products[i].productid+'"><i class="icon-th-list"></i></a></td></tr>');
           }
           if(first)
           {

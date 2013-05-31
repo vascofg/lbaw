@@ -12,6 +12,12 @@ div.products>div.product>span.picture {
 	text-align:center;
 }
 
+div.products>div.product>span.price {
+	display:block;
+	text-align:right;
+}
+
+
 div.cart>div.product {
   clear:right;
   border:2px solid;
