@@ -65,7 +65,7 @@
 		FROM product LEFT JOIN brand on (brand.brandid = product.brandid)
 		where product.name ~* ?
 		or brand.name ~* ?
-		ORDER BY priority DESC
+		ORDER BY priority DESC, brand.name, product.name
   	");
   	
   	$stmt->execute(array($search,$search,$searchwhole,$searchwhole,$search,$search));
@@ -92,7 +92,7 @@
 		FROM product LEFT JOIN brand on (brand.brandid = product.brandid)
 		where product.name ~* ?
 		or brand.name ~* ?
-		ORDER BY priority DESC
+		ORDER BY priority DESC, brand.name, product.name
     LIMIT ? OFFSET ?
   	");
   	
