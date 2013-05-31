@@ -1,5 +1,5 @@
 {include file="manager/header.tpl" active="products"}
-{include file="manager/search.tpl"}
+{include file="search.tpl"}
 <table class="ink-table ink-zebra ink-hover products">
   <thead>
   <tr>

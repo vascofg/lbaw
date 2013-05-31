@@ -13,7 +13,7 @@ $(document).ready(function(){
     var productOnCart = $("div.cart>div.product[id="+productid+"]");
     if(productOnCart.length==0) //isn't on cart yet
     {
-      var clonedProduct = product.clone().append("<span class=\"productTotal\">"+price+"</span>\
+      var clonedProduct = product.clone().append("<span class=\"productTotal\">"+price+"€</span>\
         <br>\
         <button class=\"icon-minus-sign sub\"></button>\
         <span class = \"quantity\">1</span>\
@@ -57,10 +57,10 @@ function changeQuantity(product, up){
    {
    	 var quantityElem = product.children("span.quantity");
 		 var price = productInArray['price'];
-		 var productTotal = product.children("span.producttotal");
+		 var productTotal = product.children("span.productTotal");
 		 productInArray['quantity']+=(up?1:-1);
 		 quantityElem.html(productInArray['quantity']);
-		 productTotal.html((price*productInArray['quantity']).toFixed(2));
+		 productTotal.html((price*productInArray['quantity']).toFixed(2)+'€');
 		 updateTotal(price, up);
    }
 }
@@ -77,7 +77,7 @@ function removeProduct(product){
 
 function updateTotal(value, up){
   var total = $("div.cart>div.total>span.total");
-	total.html((parseFloat(total.html())+value*(up?1:-1)).toFixed(2));
+	total.html((parseFloat(total.html())+value*(up?1:-1)).toFixed(2)+'€');
 }
 
 function getProductByID(id){
@@ -87,3 +87,72 @@ function getProductByID(id){
 function removeItemByID(id){
   return $.grep(products, function(e){ return e.id !== id; });
 }
+
+var numpages=parseInt($(".products-pagination").attr("data-numpages"));
+var search = "";
+
+function getProducts(page, first){
+  $.ajax({ url: '../../ajax/products/ajax_get_products.php',
+		 data: {search: search,
+            pagenr: page},
+		 type: 'post',
+		 success: function(output) {
+					var divProducts = $("div.products");
+          var parsed = $.parseJSON(output);
+					var products = parsed.products;
+					divProducts.empty();
+					if(products.length==0)
+          {
+            $(".products-pagination").attr("data-numpages",numpages);
+						divProducts.append('Sem resultados...');
+          }
+					else
+          {
+          	for(var i in products)
+							divProducts.append('<div class="product" id="'+products[i].productid+'" data-quantity="'+products[i].quantity+'"><span class="picture"><img src="../../img/img-not-available.png"><br></span><span class="brandname">'+products[i].brandname+'</span> <span class="name">'+products[i].name+'</span><br><span class="price">'+products[i].price+'€</span></div>');
+          }
+          if(first)
+          {
+            numpages=parseInt(parsed.numpages);
+            $(".products-pagination").attr("data-numpages",numpages);
+            pagination.setSize(numpages);
+          }
+		}
+  });
+}
+
+var pagination = new SAPO.Ink.Pagination(
+                  '.products-pagination',
+                  {
+                      size:     numpages,
+                      maxSize:  5,
+                      firstLabel:       '|<<',
+                      lastLabel:         '>>|',
+                      previousPageLabel: '<<',
+                      nextPageLabel:     '>>',
+                      previousLabel:     '<',
+                      nextLabel:         '>',
+                      onChange: function(pag)
+                      {
+                        getProducts(pag.getCurrent(), false);
+                      }
+                  }
+);
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+
+$(document).ready(function(){
+	$("input:text[name='search']").keyup(function()
+	{
+  		search=$.trim($("input:text[name='search']").val());
+		delay(function(){
+      getProducts(0, true);
+    }, 500);
+	});
+});

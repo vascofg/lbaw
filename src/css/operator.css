@@ -7,6 +7,11 @@ div.products>div.product {
   cursor:pointer;
 }
 
+div.products>div.product>span.picture {
+	display:block;
+	text-align:center;
+}
+
 div.cart>div.product {
   clear:right;
   border:2px solid;
@@ -31,4 +36,8 @@ div.cart>div.product>span.productTotal {
 
 div.cart>div.total {
   font-weight:bold;
+}
+
+.hide-all { /*Required by pagination*/
+                display: none;
 }

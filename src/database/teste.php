@@ -13,9 +13,9 @@
 		foreach ($row[1] as $modelo)
 		{
 			$stmt = $db->prepare("INSERT INTO product (name, price, quantity, brandid, description) VALUES (:name,:price,:quantity,:brandid,:description)");
-			$price = rand(15000.0,100000.0);
-			$quantity = rand(1,50);
-			$description = "Potência: ".rand(50,500)."cv";
+			$price = mt_rand(15000.0*100,100000.0*100)/100;
+			$quantity = mt_rand(1,50);
+			$description = "Potência: ".mt_rand(50,500)."cv";
 			$stmt->execute(array(name=>$modelo,price=>$price,quantity=>$quantity,brandid=>$brandid,description=>$description));
 		}
 	}

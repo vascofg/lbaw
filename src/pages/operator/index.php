@@ -5,8 +5,9 @@
       redirect("pages/operator/auth/login.php");
     else {
       include_once($BASE_PATH . 'database/products.php');
-      $products = getAllProducts();
+      $products = getAllProductsPage(0);
       $smarty->assign('products',$products);
+      $smarty->assign('numpages', ceil($products[0]['count']/$pagesize));
       $smarty->display("operator/index.tpl");
     }
 ?>
