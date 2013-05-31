@@ -14,6 +14,10 @@
 		$price = strip_tags($_POST['price']);
 		$quantity = strip_tags($_POST['quantity']);
 		$brandid = strip_tags($_POST['brandid']);
+		$description = "";
+		if(isset($_POST['description']))
+			$description = strip_tags($_POST['description']);
+
 		if(!empty($name)&&!empty($price)&&isset($quantity)&&!empty($brandid))
 		{
 			if($brandid=='other')
@@ -30,7 +34,10 @@
 					die;
 				}
 			}
-			addProduct($name,$price,$quantity,$brandid);
+			if(!empty($description))
+				addProductWithDesc($name,$price,$quantity,$brandid,$description);
+			else
+				addProduct($name,$price,$quantity,$brandid);
 		}
 		else{
 			echo("Fill all fields");

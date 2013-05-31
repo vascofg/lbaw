@@ -32,6 +32,22 @@
     return intval($db->lastInsertId(product_productid_seq));
   }
 
+  function addProductWithDesc($name, $price, $quantity, $brandid, $description) {
+    global $db;
+    try {
+      $stmt = $db->prepare("INSERT INTO product (name, price, quantity, brandid, description) VALUES (:name, :price, :quantity, :brandid, :description)");
+      $stmt->execute(array(name=>$name,price=>$price,quantity=>$quantity,brandid=>$brandid,description=>$description));
+    }
+    catch (PDOException $e) {
+      if($e->getCode() == 23505)
+        echo "Duplicate product/brand pair";
+      else
+        echo $e->getMessage();
+      die;
+    }
+    return intval($db->lastInsertId(product_productid_seq));
+  }
+
   function deleteProduct($id) {
     global $db;
     $stmt = $db->prepare("DELETE FROM product WHERE productid = :id");

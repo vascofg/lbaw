@@ -24,6 +24,10 @@
       </select>
       <input type='text' name='newbrand'>
     </div>
+    <div>
+      <label for="description">Descrição:</label>
+      <textarea class="ink-fv" type='text' name='description' id='description'></textarea>
+    </div>
   </fieldset>
   <div>
     <input type="submit" value="Adicionar" class="ink-button success">
