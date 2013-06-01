@@ -49,11 +49,13 @@
     return;
   }
   
-  function register($username,$password,$fullname,$email) {
+  function register($username,$password,$fullname,$email,$image) {
   	global $db;
+    if(empty($image))
+      $image = null;
   	try {
-  		$stmt = $db->prepare("INSERT INTO frequent_customer (username,password,fullname,email) values (:username,:password,:fullname,:email)");
-  		$stmt->execute(array($username,$password,$fullname,$email));
+  		$stmt = $db->prepare("INSERT INTO frequent_customer (username,password,fullname,email,picture) values (:username,:password,:fullname,:email,:picture)");
+  		$stmt->execute(array(username=>$username,password=>$password,fullname=>$fullname,email=>$email,picture=>$image));
   	}
   	catch (PDOException $e) {
   		if($e->getCode() == 23505)
