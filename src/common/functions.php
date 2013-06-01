@@ -30,4 +30,5 @@
 	}
   
   $pagesize=10; //Constant - Number of elements of each page
+  $maxfilesize=1048576;
 ?>

@@ -15,7 +15,7 @@
 		$fullname = strip_tags($_POST['fullname']);
 		$email = strip_tags($_POST['email']);
 		$image = "";
-		if (($_FILES["image"]["type"] == "image/jpeg" || $_FILES["image"]["type"] == "image/jpg") && $_FILES["image"]["size"] < 1048576)
+		if (($_FILES["image"]["type"] == "image/jpeg" || $_FILES["image"]["type"] == "image/jpg") && $_FILES["image"]["size"] < $maxfilesize)
 			$image = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
 		
 		if(!empty($username)&&!empty($password)&&!empty($fullname)&&!empty($email))

@@ -80,5 +80,6 @@ div>div.picture-column {
 }
 
 div>div.picture-column>img {
-	width: 400px;
+  min-width: 100px;
+	max-width: 400px;
 }
