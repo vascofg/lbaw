@@ -15,7 +15,12 @@
 		$quantity = strip_tags($_POST['quantity']);
 		$brandid = strip_tags($_POST['brandid']);
 		$description = strip_tags($_POST['description']);
-		$image = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
+		$image = "";
+		if ((($_FILES["file"]["type"] == "image/gif")
+			|| ($_FILES["file"]["type"] == "image/jpeg")
+			|| ($_FILES["file"]["type"] == "image/jpg")
+			&& ($_FILES["file"]["size"] < 1024)))
+			$image = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
 
 		if(!empty($name)&&!empty($price)&&isset($quantity)&&!empty($brandid))
 		{
