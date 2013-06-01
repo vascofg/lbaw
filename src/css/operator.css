@@ -12,6 +12,10 @@ div.products>div.product>span.picture {
 	text-align:center;
 }
 
+div.products>div.product>span.picture>img {
+	height:200px;
+}
+
 div.products>div.product>span.price {
 	display:block;
 	text-align:right;

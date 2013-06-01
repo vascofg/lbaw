@@ -105,7 +105,7 @@ function getProducts(page, first){
 					else
           {
           	for(var i in products)
-							divProducts.append('<div class="product" id="'+products[i].productid+'" data-quantity="'+products[i].quantity+'"><span class="picture"><img src="../../../img/img-not-available.png"><br></span><span class="brandname">'+products[i].brandname+'</span> <span class="name">'+products[i].name+'</span><br><span class="price">'+products[i].price+'€</span></div>');
+							divProducts.append('<div class="product" id="'+products[i].productid+'" data-quantity="'+products[i].quantity+'"><span class="picture"><img src="'+(products[i].picture==null?('../../../img/img-not-available.png'):('data:image/jpeg;base64, '+products[i].picture))+'"><br></span><span class="brandname">'+products[i].brandname+'</span> <span class="name">'+products[i].name+'</span><br><span class="price">'+products[i].price+'€</span></div>');
           }
           if(first)
           {
@@ -148,7 +148,10 @@ function saveSale(){
 	 data: {products: products},
 	 type: 'post',
 	 success: function(output) {
-	 	alert("Gravado");
+	 	if(output=='')
+		 	alert("Gravado");
+		else
+			alert("Erro: "+output);
 	 }
 	});
 }
