@@ -3,7 +3,7 @@
   // Get all customers
   function getAllCustomers() {
     global $db;
-    $stmt = $db->prepare("SELECT frequent_customerid, email,fullname, picture, username FROM frequent_customer");
+    $stmt = $db->prepare("SELECT frequent_customerid, email, fullname, username FROM frequent_customer");
     $stmt->execute();
     return $stmt->fetchAll();
   }
@@ -11,7 +11,7 @@
   function getAllCustomersPage($pagenr) {
     global $db;
     global $pagesize;
-    $stmt = $db->prepare("SELECT frequent_customerid, email,fullname, picture, username, count(*) OVER() as count FROM frequent_customer LIMIT :pagesz OFFSET :pagenr");
+    $stmt = $db->prepare("SELECT frequent_customerid, email,fullname, username, count(*) OVER() as count FROM frequent_customer LIMIT :pagesz OFFSET :pagenr");
     $stmt->execute(array(pagesz=>$pagesize,pagenr=>$pagesize*$pagenr));
     return $stmt->fetchAll();
   }
@@ -25,7 +25,7 @@
   	$searchwhole="^".$search."$";
     //TODO: Acentos
   	//Vale mais uma match pela palavra inteira
-    $stmt = $db->prepare("SELECT frequent_customerid, email,fullname, picture, username, count(*) OVER() as count
+    $stmt = $db->prepare("SELECT frequent_customerid, email,fullname, username, count(*) OVER() as count
   			 ,(case when frequent_customer.username ~* ? then 1 else 0 end) +
   			  (case when frequent_customer.fullname ~* ? then 1 else 0 end) +
   			  (case when frequent_customer.username ~* ? then 2 else 0 end) +

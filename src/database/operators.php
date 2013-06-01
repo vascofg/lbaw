@@ -3,7 +3,7 @@
   // Get all operators
   function getAllOperators() {
     global $db;
-    $stmt = $db->prepare("SELECT pos_operatorid, email,fullname, picture, username FROM pos_operator");
+    $stmt = $db->prepare("SELECT pos_operatorid, email,fullname, username FROM pos_operator");
     $stmt->execute();
     return $stmt->fetchAll();
   }
@@ -11,7 +11,7 @@
   function getAllOperatorsPage($pagenr) {
     global $db;
     global $pagesize;
-    $stmt = $db->prepare("SELECT pos_operatorid, email,fullname, picture, username, count(*) OVER() as count FROM pos_operator LIMIT :pagesz OFFSET :pagenr");
+    $stmt = $db->prepare("SELECT pos_operatorid, email,fullname, username, count(*) OVER() as count FROM pos_operator LIMIT :pagesz OFFSET :pagenr");
     $stmt->execute(array(pagesz=>$pagesize,pagenr=>$pagesize*$pagenr));
     return $stmt->fetchAll();
   }
@@ -25,7 +25,7 @@
   	$searchwhole="^".$search."$";
     //TODO: Acentos
   	//Vale mais uma match pela palavra inteira
-    $stmt = $db->prepare("SELECT pos_operatorid, email,fullname, picture, username, count(*) OVER() as count
+    $stmt = $db->prepare("SELECT pos_operatorid, email,fullname, username, count(*) OVER() as count
   			 ,(case when pos_operator.username ~* ? then 1 else 0 end) +
   			  (case when pos_operator.fullname ~* ? then 1 else 0 end) +
   			  (case when pos_operator.username ~* ? then 2 else 0 end) +

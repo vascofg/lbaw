@@ -19,7 +19,7 @@
   function getAllProductsPageImage($pagenr) { //get with images (for operator)
     global $db;
     global $pagesize;
-    $stmt = $db->prepare("SELECT product.*, brand.name as brandname, count(*) OVER() AS count FROM product LEFT JOIN brand on (brand.brandid = product.brandid) ORDER BY brand.name, product.name LIMIT :pagesz OFFSET :pagenr");
+    $stmt = $db->prepare("SELECT product.*, brand.name as brandname, count(*) OVER() AS count FROM product LEFT JOIN brand on (brand.brandid = product.brandid) WHERE product.quantity>0 ORDER BY brand.name, product.name LIMIT :pagesz OFFSET :pagenr");
     $stmt->execute(array(pagesz=>$pagesize,pagenr=>$pagesize*$pagenr));
     return $stmt->fetchAll();
   }
@@ -131,8 +131,8 @@
 				  (case when brand.name ~* ? then 3 else 0 end) as priority,
           count(*) OVER() AS count
 		FROM product LEFT JOIN brand on (brand.brandid = product.brandid)
-		where product.name ~* ?
-		or brand.name ~* ?
+		where product.quantity>0 and (product.name ~* ?
+		or brand.name ~* ?)
 		ORDER BY priority DESC, brand.name, product.name
     LIMIT ? OFFSET ?
   	");
