@@ -1,7 +1,6 @@
 {include file="manager/header.tpl" active="products"}
 <form enctype="multipart/form-data" method="post" action="{$BASE_URL}actions/manager/products/action_add_product.php" class="ink-form block" onsubmit="return SAPO.Ink.FormValidator.validate(this);">
   <fieldset>
-    <legend>Novo produto</legend>
     <div class="control required">
       <label for="name">Nome:</label>
       <input class="ink-fv-required" type='text' name='name' id='name'>

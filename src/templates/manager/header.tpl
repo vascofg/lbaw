@@ -41,7 +41,7 @@
           </ul>
         </li>
 			  <li class="{if $active=="managers"}active{/if}">
-          <a href='#'>Gestores</a>
+          <a href='{$BASE_URL}pages/manager/managers/list_managers.php'>Gestores</a>
           <ul class="submenu">
             <li><a href='{$BASE_URL}pages/manager/auth/register.php'>Novo Gestor</a></li>
           </ul>
