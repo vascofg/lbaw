@@ -21,6 +21,7 @@
 			<li><a href='{$BASE_URL}'>Home externa</a></li>
       {if isLoggedInOperator()}
         <li class="{if $active=="home"}active{/if}"><a href='{$BASE_URL}pages/operator'><i class="icon-home"></i></a></li>
+        <li class="{if $active=="sales"}active{/if}"><a href='{$BASE_URL}pages/operator/sales'>Venda</a></li>
         <li><a href='{$BASE_URL}actions/operator/auth/action_logout.php'>Logout</a></li>
       {/if}
     </ul>

@@ -16,6 +16,14 @@
     return $stmt->fetchAll();
   }
   
+  function getAllProductsPageImage($pagenr) { //get with images (for operator)
+    global $db;
+    global $pagesize;
+    $stmt = $db->prepare("SELECT product.*, brand.name as brandname, count(*) OVER() AS count FROM product LEFT JOIN brand on (brand.brandid = product.brandid) ORDER BY brand.name, product.name LIMIT :pagesz OFFSET :pagenr");
+    $stmt->execute(array(pagesz=>$pagesize,pagenr=>$pagesize*$pagenr));
+    return $stmt->fetchAll();
+  }
+  
 
   function addProduct($name, $price, $quantity, $brandid, $description, $image) {
     global $db;
@@ -77,7 +85,7 @@
   	return ($stmt->fetchAll());
   }
   
-   function searchProductPage($search,$pagenr) {
+  function searchProductPage($search,$pagenr) {
   	global $db;
     global $pagesize;
   	$searcharray = explode(" ",$search);
@@ -89,6 +97,34 @@
     //A marca vale mais que o produto
   	$stmt = $db->prepare("
   	SELECT product.name, product.productid, product.price, product.quantity, brand.name as brandname
+				  ,(case when product.name ~* ? then 1 else 0 end) +
+				  (case when brand.name ~* ? then 1 else 0 end) +
+				  (case when product.name ~* ? then 2 else 0 end) +
+				  (case when brand.name ~* ? then 3 else 0 end) as priority,
+          count(*) OVER() AS count
+		FROM product LEFT JOIN brand on (brand.brandid = product.brandid)
+		where product.name ~* ?
+		or brand.name ~* ?
+		ORDER BY priority DESC, brand.name, product.name
+    LIMIT ? OFFSET ?
+  	");
+  	
+  	$stmt->execute(array($search,$search,$searchwhole,$searchwhole,$search,$search,$pagesize,$pagesize*$pagenr));
+  	return ($stmt->fetchAll());
+  }
+  
+  function searchProductPageImage($search,$pagenr) {
+  	global $db;
+    global $pagesize;
+  	$searcharray = explode(" ",$search);
+  	$search = str_replace(" ","|",$search);
+  	$search = "(".$search.")";
+  	$searchwhole="^".$search."$";
+    //TODO: Acentos
+  	//Vale mais uma match pela palavra inteira
+    //A marca vale mais que o produto
+  	$stmt = $db->prepare("
+  	SELECT product.*, brand.name as brandname
 				  ,(case when product.name ~* ? then 1 else 0 end) +
 				  (case when brand.name ~* ? then 1 else 0 end) +
 				  (case when product.name ~* ? then 2 else 0 end) +

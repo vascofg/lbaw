@@ -8,9 +8,12 @@
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	
-	if(checkLoginOperator($username,md5($password))) //md5 hash to be replaced by something a bit more secure
+	$userID = checkLoginOperator($username,md5($password));
+	
+	if($userID>0) //md5 hash to be replaced by something a bit more secure
 	{
 		$_SESSION['operator']['username']=$username;
+		$_SESSION['operator']['id']=$userID;
 		redirect('pages/operator');
 	}
 	else

@@ -42,11 +42,7 @@ $(document).ready(function(){
     changeQuantity(product, false);
   });
   $("button.submit").click(function() {
-    var string="";
-    $.each( products, function( i, val ) {
-      string+=val['brandname']+' '+val['name']+' '+val['price']+'\n';
-    });
-    alert(string);
+		saveSale();
   });
 });
 
@@ -92,7 +88,7 @@ var numpages=parseInt($(".products-pagination").attr("data-numpages"));
 var search = "";
 
 function getProducts(page, first){
-  $.ajax({ url: '../../ajax/products/ajax_get_products.php',
+  $.ajax({ url: '../../../ajax/products/ajax_get_products_operator.php',
 		 data: {search: search,
             pagenr: page},
 		 type: 'post',
@@ -109,7 +105,7 @@ function getProducts(page, first){
 					else
           {
           	for(var i in products)
-							divProducts.append('<div class="product" id="'+products[i].productid+'" data-quantity="'+products[i].quantity+'"><span class="picture"><img src="../../img/img-not-available.png"><br></span><span class="brandname">'+products[i].brandname+'</span> <span class="name">'+products[i].name+'</span><br><span class="price">'+products[i].price+'€</span></div>');
+							divProducts.append('<div class="product" id="'+products[i].productid+'" data-quantity="'+products[i].quantity+'"><span class="picture"><img src="../../../img/img-not-available.png"><br></span><span class="brandname">'+products[i].brandname+'</span> <span class="name">'+products[i].name+'</span><br><span class="price">'+products[i].price+'€</span></div>');
           }
           if(first)
           {
@@ -146,6 +142,16 @@ var delay = (function(){
     timer = setTimeout(callback, ms);
   };
 })();
+
+function saveSale(){
+	$.ajax({ url: '../../../ajax/sales/ajax_save_sale.php',
+	 data: {products: products},
+	 type: 'post',
+	 success: function(output) {
+	 	alert("Gravado");
+	 }
+	});
+}
 
 $(document).ready(function(){
 	$("input:text[name='search']").keyup(function()

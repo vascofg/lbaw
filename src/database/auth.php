@@ -12,10 +12,13 @@
   // Check Operator Login
   function checkLoginOperator($username,$password) {
     global $db;
-    $stmt = $db->prepare("SELECT count(*) FROM pos_operator where username = :username and password = :password");
+    $stmt = $db->prepare("SELECT pos_operatorid FROM pos_operator where username = :username and password = :password");
     $stmt->execute(array($username,$password));
 		$result = $stmt->fetch(PDO::FETCH_NUM);
-    return ($result[0]>0);
+		if($result)
+    	return ($result[0]);
+    else
+    	return (0);
   }
   
   function registerManager($username,$password,$fullname,$email) {
