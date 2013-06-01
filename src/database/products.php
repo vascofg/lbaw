@@ -16,23 +16,8 @@
     return $stmt->fetchAll();
   }
   
-  function addProduct($name, $price, $quantity, $brandid) {
-    global $db;
-    try {
-		  $stmt = $db->prepare("INSERT INTO product (name, price, quantity, brandid) VALUES (:name, :price, :quantity, :brandid)");
-		  $stmt->execute(array(name=>$name,price=>$price,quantity=>$quantity,brandid=>$brandid));
-		}
-		catch (PDOException $e) {
-			if($e->getCode() == 23505)
-				echo "Duplicate product/brand pair";
-			else
-				echo $e->getMessage();
-			die;
-		}
-    return intval($db->lastInsertId(product_productid_seq));
-  }
 
-  function addProductWithDesc($name, $price, $quantity, $brandid, $description) {
+  function addProduct($name, $price, $quantity, $brandid, $description) {
     global $db;
     try {
       $stmt = $db->prepare("INSERT INTO product (name, price, quantity, brandid, description) VALUES (:name, :price, :quantity, :brandid, :description)");

@@ -14,9 +14,7 @@
 		$price = strip_tags($_POST['price']);
 		$quantity = strip_tags($_POST['quantity']);
 		$brandid = strip_tags($_POST['brandid']);
-		$description = "";
-		if(isset($_POST['description']))
-			$description = strip_tags($_POST['description']);
+		$description = strip_tags($_POST['description']);
 
 		if(!empty($name)&&!empty($price)&&isset($quantity)&&!empty($brandid))
 		{
@@ -34,10 +32,7 @@
 					die;
 				}
 			}
-			if(!empty($description))
-				addProductWithDesc($name,$price,$quantity,$brandid,$description);
-			else
-				addProduct($name,$price,$quantity,$brandid);
+			addProduct($name,$price,$quantity,$brandid,$description);
 		}
 		else{
 			echo("Fill all fields");

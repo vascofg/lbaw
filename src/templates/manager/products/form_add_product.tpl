@@ -26,7 +26,7 @@
     </div>
     <div>
       <label for="description">Descrição:</label>
-      <textarea class="ink-fv" type='text' name='description' id='description'></textarea>
+      <textarea type='text' name='description' id='description'></textarea>
     </div>
   </fieldset>
   <div>
