@@ -31,8 +31,8 @@
     <div>    
       <label for="image">Imagem:</label>
       <div class="input-file"><input type="file" name="image" id="image"></div>
+      <p class="tip">Apenas formato *.jpg ou *.jpeg e tamanho maximo de 1 MByte</p>
     </div>
-  
   </fieldset>
   <div>
     <input type="submit" value="Adicionar" class="ink-button success">
