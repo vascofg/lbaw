@@ -3,7 +3,7 @@
   // Get all products
   function getAllProducts() {
     global $db;
-    $stmt = $db->prepare("SELECT product.*, brand.name as brandname FROM product LEFT JOIN brand on (brand.brandid = product.brandid) ORDER BY brand.name, product.name");
+    $stmt = $db->prepare("SELECT product.name, product.productid, product.price, product.quantity, brand.name as brandname FROM product LEFT JOIN brand on (brand.brandid = product.brandid) ORDER BY brand.name, product.name");
     $stmt->execute();
     return $stmt->fetchAll();
   }
@@ -11,17 +11,21 @@
   function getAllProductsPage($pagenr) {
     global $db;
     global $pagesize;
-    $stmt = $db->prepare("SELECT product.*, brand.name as brandname, count(*) OVER() AS count FROM product LEFT JOIN brand on (brand.brandid = product.brandid) ORDER BY brand.name, product.name LIMIT :pagesz OFFSET :pagenr");
+    $stmt = $db->prepare("SELECT product.name, product.productid, product.price, product.quantity, brand.name as brandname, count(*) OVER() AS count FROM product LEFT JOIN brand on (brand.brandid = product.brandid) ORDER BY brand.name, product.name LIMIT :pagesz OFFSET :pagenr");
     $stmt->execute(array(pagesz=>$pagesize,pagenr=>$pagesize*$pagenr));
     return $stmt->fetchAll();
   }
   
 
-  function addProduct($name, $price, $quantity, $brandid, $description) {
+  function addProduct($name, $price, $quantity, $brandid, $description, $image) {
     global $db;
+    if(empty($description))
+      $description = null;
+     if(empty($image))
+      $image = null;
     try {
-      $stmt = $db->prepare("INSERT INTO product (name, price, quantity, brandid, description) VALUES (:name, :price, :quantity, :brandid, :description)");
-      $stmt->execute(array(name=>$name,price=>$price,quantity=>$quantity,brandid=>$brandid,description=>$description));
+      $stmt = $db->prepare("INSERT INTO product (name, price, quantity, brandid, description, picture) VALUES (:name, :price, :quantity, :brandid, :description, :picture)");
+      $stmt->execute(array(name=>$name,price=>$price,quantity=>$quantity,brandid=>$brandid,description=>$description,picture=>$image));
     }
     catch (PDOException $e) {
       if($e->getCode() == 23505)
@@ -58,7 +62,7 @@
   	//Vale mais uma match pela palavra inteira
     //A marca vale mais que o produto
   	$stmt = $db->prepare("
-  	SELECT product.*, brand.name as brandname
+  	SELECT product.name, product.productid, product.price, product.quantity, brand.name as brandname
 				  ,(case when product.name ~* ? then 1 else 0 end) +
 				  (case when brand.name ~* ? then 1 else 0 end) +
 				  (case when product.name ~* ? then 2 else 0 end) +
@@ -84,7 +88,7 @@
   	//Vale mais uma match pela palavra inteira
     //A marca vale mais que o produto
   	$stmt = $db->prepare("
-  	SELECT product.*, brand.name as brandname
+  	SELECT product.name, product.productid, product.price, product.quantity, brand.name as brandname
 				  ,(case when product.name ~* ? then 1 else 0 end) +
 				  (case when brand.name ~* ? then 1 else 0 end) +
 				  (case when product.name ~* ? then 2 else 0 end) +

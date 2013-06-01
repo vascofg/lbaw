@@ -1,5 +1,5 @@
 {include file="manager/header.tpl" active="products"}
-<form method="post" action="{$BASE_URL}actions/manager/products/action_add_product.php" class="ink-form block" onsubmit="return SAPO.Ink.FormValidator.validate(this);">
+<form enctype="multipart/form-data" method="post" action="{$BASE_URL}actions/manager/products/action_add_product.php" class="ink-form block" onsubmit="return SAPO.Ink.FormValidator.validate(this);">
   <fieldset>
     <legend>Novo produto</legend>
     <div class="control required">
@@ -28,6 +28,11 @@
       <label for="description">Descrição:</label>
       <textarea type='text' name='description' id='description'></textarea>
     </div>
+    <div>    
+      <label for="image">Imagem:</label>
+      <div class="input-file"><input type="file" name="image" id="image"></div>
+    </div>
+  
   </fieldset>
   <div>
     <input type="submit" value="Adicionar" class="ink-button success">

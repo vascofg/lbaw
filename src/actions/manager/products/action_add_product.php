@@ -15,6 +15,7 @@
 		$quantity = strip_tags($_POST['quantity']);
 		$brandid = strip_tags($_POST['brandid']);
 		$description = strip_tags($_POST['description']);
+		$image = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
 
 		if(!empty($name)&&!empty($price)&&isset($quantity)&&!empty($brandid))
 		{
@@ -32,7 +33,7 @@
 					die;
 				}
 			}
-			addProduct($name,$price,$quantity,$brandid,$description);
+			addProduct($name,$price,$quantity,$brandid,$description,$image);
 		}
 		else{
 			echo("Fill all fields");
