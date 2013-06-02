@@ -29,6 +29,6 @@
 		header('Location: '.$BASE_URL.$page);
 	}
   
-  $pagesize=10; //Constant - Number of elements of each page
-  $maxfilesize=1048576;
+  $pagesize=12; //Constant - Number of elements of each page
+  $maxfilesize=1048576; //Constant - Picture max size (in bytes)
 ?>

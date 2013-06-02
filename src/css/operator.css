@@ -5,6 +5,12 @@ div.products>div.product {
   padding:2px;
   cursor:hand;
   cursor:pointer;
+  width:200px;
+  max-width:200px;
+  font-size:1.2em;
+  overflow:hidden;
+  text-overflow:ellipsis; /*this is not working*/
+  white-space:nowrap;
 }
 
 div.products>div.product>span.picture {
@@ -20,7 +26,6 @@ div.products>div.product>span.price {
 	display:block;
 	text-align:right;
 }
-
 
 div.cart>div.product {
   clear:right;

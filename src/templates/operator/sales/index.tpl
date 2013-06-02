@@ -1,6 +1,6 @@
 {include file="operator/header.tpl" active="sales"}
 {include file="search.tpl"}
-<div class="ink-l60">
+<div class="ink-l70">
 	<h4>Productos</h4>
 	<div class="products">
 	{foreach $products as $product}
@@ -11,7 +11,7 @@
 	</div>
 	<nav class="ink-navigation products-pagination ink-vspace" data-numpages={$numpages}></nav>
 </div>
-<div class="ink-l40">
+<div class="ink-l30">
 	<div class="cart">
 		<h4>Carrinho</h4>
 		<div class="total">Total: <span class="total">0.00€</span></div>
