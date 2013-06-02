@@ -1,13 +1,33 @@
 <?php
 
-  // Get all products
+  // Get all brands
   function getAllBrands() {
     global $db;
     $stmt = $db->prepare("SELECT * FROM brand ORDER BY brand.name");
     $stmt->execute();
     return $stmt->fetchAll();
   }
-  
+
+    // Get a brand
+  function getBrand($id) {
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM brand WHERE brandid=:id");
+    $stmt->execute(array(id=>$id));
+    return $stmt->fetch();
+  }
+
+  function editBrand($name, $id) {
+    global $db;
+    try{
+        $stmt = $db->prepare("UPDATE brand SET name=:name WHERE brandid=:id");
+        $stmt->execute(array(name=>$name,id=>$id));
+    }
+    catch (PDOException $e) {
+      echo $e->getMessage();
+      die;
+    }
+  }
+
   function getAllBrandsUsage() {
     global $db;
     $stmt = $db->prepare("SELECT brand.brandid, brand.name, count(product.brandid) as usage FROM product RIGHT JOIN brand on (brand.brandid = product.brandid) GROUP BY brand.name, brand.brandid ORDER BY count(product.brandid)=0 DESC, brand.name");

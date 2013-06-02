@@ -45,6 +45,25 @@
     return intval($db->lastInsertId(product_productid_seq));
   }
 
+  function editProduct($name, $price, $quantity, $brandid, $description, $image, $id) {
+    global $db;
+    if(empty($description))
+      $description = null;
+      try{
+       if(!empty($image)){
+          $stmt = $db->prepare("UPDATE product SET name=:name, price=:price, quantity=:quantity, brandid=:brandid, description=:description, picture=:picture WHERE productid=:id");
+          $stmt->execute(array(name=>$name,price=>$price,quantity=>$quantity,brandid=>$brandid,description=>$description,picture=>$image,id=>$id));
+       }else{
+          $stmt = $db->prepare("UPDATE product SET name=:name, price=:price, quantity=:quantity, brandid=:brandid, description=:description WHERE productid=:id");
+          $stmt->execute(array(name=>$name,price=>$price,quantity=>$quantity,brandid=>$brandid,description=>$description,id=>$id));
+        } 
+      }
+      catch (PDOException $e) {
+        echo $e->getMessage();
+        die;
+      }
+  }
+
   function deleteProduct($id) {
     global $db;
     $stmt = $db->prepare("DELETE FROM product WHERE productid = :id");

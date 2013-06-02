@@ -6,12 +6,13 @@
     <th>Marca</th>
     <th>Utilizações</th>
     <th>Eliminar</th>
+    <th>Editar</th>
   </tr>
   </thead>
   <tbody>
 {foreach $brands as $brand}
 	<tr>
-		<td width="80%">{$brand.name}</td>
+		<td width="70%">{$brand.name}</td>
 		<td width="10%">{$brand.usage}</td>
 		<td width="10%">
 		{if $brand.usage==0}
@@ -21,6 +22,9 @@
 		{if $brand.usage==0}
 				</a>
 		{/if}
+		</td>
+		<td width="10%">
+			<a href="{$BASE_URL}pages/manager/brands/edit_brand.php?id={$brand.brandid}"><i class="icon-edit"></i></a>
 		</td>
 	</tr>
 {foreachelse}

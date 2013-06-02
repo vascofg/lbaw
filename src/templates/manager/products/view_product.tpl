@@ -11,6 +11,7 @@
     {$product.quantity} em stock
     <br>
     <a href="{$BASE_URL}actions/manager/products/action_delete_product.php?id={$product.productid}">Eliminar</a>
+    <a href="{$BASE_URL}pages/manager/products/edit_product.php?id={$product.productid}">Editar</a>
   </div>
 </div>
 {include file="manager/footer.tpl"}
