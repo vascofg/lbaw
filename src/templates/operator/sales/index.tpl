@@ -13,9 +13,11 @@
 </div>
 <div class="ink-l30">
 	<div class="cart">
-		<h4>Carrinho</h4>
-		<div class="total">Total: <span class="total">0.00€</span></div>
-		<button class="ink-button success submit" id="submit" disabled>Submeter</button>
+		<form action="{$BASE_URL}pages/operator/sales/finish_sale.php" method="post">
+			<h4>Carrinho</h4>
+			<div class="total">Total: <span class="total">0.00€</span></div>
+			<input type="submit" class="ink-button success submit" id="submit" value="Continuar" disabled>
+		</form>
 	</div>
 </div>
 {include file="operator/footer.tpl"}

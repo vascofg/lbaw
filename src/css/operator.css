@@ -19,7 +19,8 @@ div.products>div.product>span.picture {
 }
 
 div.products>div.product>span.picture>img {
-	height:200px;
+	width:200px;
+	max-height:200px;
 }
 
 div.products>div.product>span.price {
@@ -27,29 +28,29 @@ div.products>div.product>span.price {
 	text-align:right;
 }
 
-div.cart>div.product {
+div.cart>form>div.product {
   clear:right;
   border:2px solid;
   margin:2px;
   padding:2px;
 }
 
-div.cart>div.product>button {
+div.cart>form>div.product>button {
   color:inherit;
   background-color: transparent;
   border-color: transparent;
   outline: 0;
 }
 
-div.cart>div.product>button.del {
+div.cart>form>div.product>button.del {
   float:right;
 }
 
-div.cart>div.product>span.productTotal {
+div.cart>form>div.product>span.productTotal {
   float:right;
 }
 
-div.cart>div.total {
+div.cart>form>div.total {
   font-weight:bold;
 }
 
