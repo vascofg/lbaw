@@ -19,7 +19,7 @@ function getOperators(page, first){
 					else
           {
 						for(var i in operators)
-							tablebody.append('<tr><td>'+operators[i].username+'</td><td>'+operators[i].fullname+'</td><td><a href="view_operator.php?id='+operators[i].posoperatorid+'"><i class="icon-th-list"></i></a></tr>');
+							tablebody.append('<tr><td>'+stripslashes(operators[i].username)+'</td><td>'+stripslashes(operators[i].fullname)+'</td><td><a href="view_operator.php?id='+operators[i].posoperatorid+'"><i class="icon-th-list"></i></a></tr>');
           }
           if(first)
           {

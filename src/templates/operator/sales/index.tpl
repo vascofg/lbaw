@@ -22,4 +22,5 @@
 </div>
 {include file="operator/footer.tpl"}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="{$BASE_URL}javascript/functions.js"></script>
 <script src="{$BASE_URL}javascript/operator/sales/cart.js"></script>

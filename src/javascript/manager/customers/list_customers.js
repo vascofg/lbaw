@@ -19,7 +19,7 @@ function getCustomers(page, first){
 					else
           {
 						for(var i in customers)
-							tablebody.append('<tr><td>'+customers[i].username+'</td><td>'+customers[i].fullname+'</td><td><a href="view_operator.php?id='+customers[i].posoperatorid+'"><i class="icon-th-list"></i></a></tr>');
+							tablebody.append('<tr><td>'+stripslashes(customers[i].username)+'</td><td>'+stripslashes(customers[i].fullname)+'</td><td><a href="view_operator.php?id='+customers[i].posoperatorid+'"><i class="icon-th-list"></i></a></tr>');
           }
           if(first)
           {

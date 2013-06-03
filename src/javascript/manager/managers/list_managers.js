@@ -19,7 +19,7 @@ function getManagers(page, first){
 					else
           {
 						for(var i in managers)
-							tablebody.append('<tr><td>'+managers[i].username+'</td><td>'+managers[i].fullname+'</td><td><a href="view_manager.php?id='+managers[i].system_managerid+'"><i class="icon-th-list"></i></a></tr>');
+							tablebody.append('<tr><td>'+stripslashes(managers[i].username)+'</td><td>'+stripslashes(managers[i].fullname)+'</td><td><a href="view_manager.php?id='+managers[i].system_managerid+'"><i class="icon-th-list"></i></a></tr>');
           }
           if(first)
           {
