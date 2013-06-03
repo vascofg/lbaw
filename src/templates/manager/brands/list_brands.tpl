@@ -12,7 +12,7 @@
   <tbody>
 {foreach $brands as $brand}
 	<tr>
-		<td width="70%">{$brand.name}</td>
+		<td width="70%">{stripslashes($brand.name)}</td>
 		<td width="10%">{$brand.usage}</td>
 		<td width="10%">
 		{if $brand.usage==0}

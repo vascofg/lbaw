@@ -3,7 +3,7 @@
   <fieldset>
     <div class="control required">
       <label for="name">Nome:</label>
-      <input class="ink-fv-required" type='text' name='name' id='name' value='{$brand["name"]}'>
+      <input class="ink-fv-required" type='text' name='name' id='name' value="{stripslashes($brand['name'])}">
     </div>
     <input type="hidden" name="id" value="{$brand['brandid']}"></input>
   </fieldset>

@@ -11,8 +11,8 @@
   <tbody>
 {foreach $customers as $customer}
 	<tr>
-		<td>{$customer.username}</td>
-		<td>{$customer.fullname}</td>
+		<td>{stripslashes($customer.username)}</td>
+		<td>{stripslashes($customer.fullname)}</td>
 		<td><a href="{$BASE_URL}pages/manager/customers/view_customer.php?id={$customer.frequent_customerid}"><i class="icon-th-list"></i></a>
 	</tr>
 {foreachelse}

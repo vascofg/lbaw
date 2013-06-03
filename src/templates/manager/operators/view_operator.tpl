@@ -4,9 +4,9 @@
 		<img src="{if ($operator.picture!='')}data:image/jpeg;base64, {$operator.picture}{else}{$BASE_URL}img/img-not-available.png{/if}">
 	</div>
 	<div>
-    {$operator.username}<br>
-    {$operator.fullname}<br>
-    {$operator.email}<br>
+    {stripslashes($operator.username)}<br>
+    {stripslashes($operator.fullname)}<br>
+    {stripslashes($operator.email)}<br>
     <br>
     <a href="{$BASE_URL}actions/manager/operators/action_delete_operator.php?id={$operator.pos_operatorid}">Remover</a>  
   </div>

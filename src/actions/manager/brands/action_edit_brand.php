@@ -21,6 +21,6 @@
 			echo("Fill all fields");
 			die;
 		}
-		redirect('pages/manager/products/list_products.php');
+		redirect('pages/manager/brands/list_brands.php');
 	}
 ?>

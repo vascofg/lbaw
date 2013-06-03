@@ -11,8 +11,8 @@
   <tbody>
 {foreach $managers as $manager}
 	<tr>
-		<td>{$manager.username}</td>
-		<td>{$manager.fullname}</td>
+		<td>{stripslashes($manager.username)}</td>
+		<td>{stripslashes($manager.fullname)}</td>
 		<td><a href="{$BASE_URL}pages/manager/managers/view_manager.php?id={$manager.system_managerid}"><i class="icon-th-list"></i></a>
 	</tr>
 {foreachelse}

@@ -11,8 +11,8 @@
   <tbody>
 {foreach $operators as $operator}
 	<tr>
-		<td>{$operator.username}</td>
-		<td>{$operator.fullname}</td>
+		<td>{stripslashes($operator.username)}</td>
+		<td>{stripslashes($operator.fullname)}</td>
 		<td><a href="{$BASE_URL}pages/manager/operators/view_operator.php?id={$operator.pos_operatorid}"><i class="icon-th-list"></i></a>
 	</tr>
 {foreachelse}

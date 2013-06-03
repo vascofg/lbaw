@@ -13,8 +13,8 @@
   <tbody>
 {foreach $products as $product}
 	  <tr>
-		  <td>{$product.brandname}</td>
-		  <td>{$product.name}</td>
+		  <td>{stripslashes($product.brandname)}</td>
+		  <td>{stripslashes($product.name)}</td>
 		  <td>{$product.price}€</td>
 		  <td>{$product.quantity}</td>
 		  <td><a href="{$BASE_URL}pages/manager/products/view_product.php?id={$product.productid}"><i class="icon-th-list"></i></a></td>

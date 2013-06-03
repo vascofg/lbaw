@@ -3,7 +3,7 @@
   <fieldset>
     <div class="control required">
       <label for="name">Nome:</label>
-      <input class="ink-fv-required" type='text' name='name' id='name' value='{$product["name"]}'>
+      <input class="ink-fv-required" type='text' name='name' id='name' value="{stripslashes($product['name'])}">
     </div>
     <div class="control required">
       <label for="price">Preço:</label>
@@ -17,7 +17,7 @@
       <label for="brand">Marca:</label>
       <select name='brandid' id='brand'>
         {foreach $brands as $brand}
-          <option value='{$brand.brandid}' {if $brand.brandid == $product['brandid']}selected{/if}>{$brand.name}</option>
+          <option value='{$brand.brandid}' {if $brand.brandid == $product['brandid']}selected{/if}>{stripslashes($brand.name)}</option>
         {/foreach}
         <option value='other'>Outra</option>
       </select>
@@ -25,7 +25,7 @@
     </div>
     <div>
       <label for="description">Descrição:</label>
-      <textarea name='description' id='description'>{$product['description']}</textarea>
+      <textarea name='description' id='description'>{stripslashes($product['description'])}</textarea>
     </div>
     <div>
       <label for="image">Imagem:</label>
