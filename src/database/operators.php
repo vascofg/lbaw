@@ -48,6 +48,44 @@
     $stmt->execute(array(id=>$id));
     return;
   }
+
+  function editOperatorWithPassword($username,$password,$fullname,$email,$image,$id) {
+    global $db;
+    
+    try {
+      if(empty($image)){
+        $stmt = $db->prepare("UPDATE pos_operator SET username=:username,password=:password,fullname=:fullname,email=:email WHERE pos_operatorid=:id");
+        $stmt->execute(array(username=>$username,password=>$password,fullname=>$fullname,email=>$email,id=>$id));
+      }
+      else{
+        $stmt = $db->prepare("UPDATE pos_operator SET username=:username,password=:password,fullname=:fullname,email=:email,picture=:picture WHERE pos_operatorid=:id");
+        $stmt->execute(array(username=>$username,password=>$password,fullname=>$fullname,email=>$email,picture=>$image,id=>$id));
+      }
+    }
+    catch (PDOException $e) {
+      echo $e->getMessage();
+      die;
+    }
+  }
+
+  function editOperator($username,$fullname,$email,$image,$id) {
+    global $db;
+    
+    try {
+      if(empty($image)){
+        $stmt = $db->prepare("UPDATE pos_operator SET username=:username,fullname=:fullname,email=:email WHERE pos_operatorid=:id");
+        $stmt->execute(array(username=>$username,fullname=>$fullname,email=>$email,id=>$id));
+      }
+      else{
+        $stmt = $db->prepare("UPDATE pos_operator SET username=:username,fullname=:fullname,email=:email,picture=:picture WHERE pos_operatorid=:id");
+        $stmt->execute(array(username=>$username,fullname=>$fullname,email=>$email,picture=>$image,id=>$id));
+      }
+    }
+    catch (PDOException $e) {
+      echo $e->getMessage();
+      die;
+    }
+  }
   
   function register($username,$password,$fullname,$email,$image) {
   	global $db;

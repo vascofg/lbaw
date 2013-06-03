@@ -8,6 +8,8 @@
     {stripslashes($manager.fullname)}<br>
     {stripslashes($manager.email)}<br>
     <br>
+    <a href="{$BASE_URL}pages/manager/auth/edit.php?id={$manager.system_managerid}">Editar</a>
+    <br> 
     <a href="{$BASE_URL}actions/manager/managers/action_delete_manager.php?id={$manager.system_managerid}">Remover</a>  
   </div>
 </div>
