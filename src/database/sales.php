@@ -19,4 +19,16 @@
     }
 	}
 	
+	function getCardBalance($cardnumber)
+	{
+		global $db;
+	  $stmt = $db->prepare("SELECT balance from customer_card WHERE customer_cardid = :id");
+	  $stmt->execute(array(id=>$cardnumber));
+		$result = $stmt->fetch(PDO::FETCH_NUM);
+		if($result)
+    	return ($result[0]);
+    else
+    	return (-1);
+	}
+	
 ?>

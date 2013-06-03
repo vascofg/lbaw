@@ -3,7 +3,7 @@
   // Get all customers
   function getAllCustomers() {
     global $db;
-    $stmt = $db->prepare("SELECT frequent_customerid, email, fullname, username FROM frequent_customer");
+    $stmt = $db->prepare("SELECT frequent_customerid, email, fullname, username FROM frequent_customer ORDER BY username");
     $stmt->execute();
     return $stmt->fetchAll();
   }
@@ -11,7 +11,7 @@
   function getAllCustomersPage($pagenr) {
     global $db;
     global $pagesize;
-    $stmt = $db->prepare("SELECT frequent_customerid, email,fullname, username, count(*) OVER() as count FROM frequent_customer LIMIT :pagesz OFFSET :pagenr");
+    $stmt = $db->prepare("SELECT frequent_customerid, email,fullname, username, count(*) OVER() as count FROM frequent_customer ORDER BY username LIMIT :pagesz OFFSET :pagenr");
     $stmt->execute(array(pagesz=>$pagesize,pagenr=>$pagesize*$pagenr));
     return $stmt->fetchAll();
   }

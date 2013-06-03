@@ -24,7 +24,7 @@
     // Get all Managers
   function getAllManagers() {
     global $db;
-    $stmt = $db->prepare("SELECT system_managerid, email,fullname, username FROM system_manager");
+    $stmt = $db->prepare("SELECT system_managerid, email,fullname, username FROM system_manager ORDER BY username");
     $stmt->execute();
     return $stmt->fetchAll();
   }
@@ -32,7 +32,7 @@
   function getAllManagersPage($pagenr) {
     global $db;
     global $pagesize;
-    $stmt = $db->prepare("SELECT system_managerid, email,fullname, username, count(*) OVER() as count FROM system_manager LIMIT :pagesz OFFSET :pagenr");
+    $stmt = $db->prepare("SELECT system_managerid, email,fullname, username, count(*) OVER() as count FROM system_manager ORDER BY username LIMIT :pagesz OFFSET :pagenr");
     $stmt->execute(array(pagesz=>$pagesize,pagenr=>$pagesize*$pagenr));
     return $stmt->fetchAll();
   }

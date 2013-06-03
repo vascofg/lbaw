@@ -54,6 +54,12 @@ div.cart>form>div.total {
   font-weight:bold;
 }
 
+label {
+	display: inline-block;
+	width:180px;
+	text-align:right;
+}
+
 .hide-all { /*Required by pagination*/
                 display: none;
 }
