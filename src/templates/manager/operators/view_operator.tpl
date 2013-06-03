@@ -8,6 +8,8 @@
     {stripslashes($operator.fullname)}<br>
     {stripslashes($operator.email)}<br>
     <br>
+    <a href="{$BASE_URL}pages/manager/operators/edit_operator.php?id={$operator.pos_operatorid}">Editar</a> 
+    <br>
     <a href="{$BASE_URL}actions/manager/operators/action_delete_operator.php?id={$operator.pos_operatorid}">Remover</a>  
   </div>
 </div>

@@ -8,6 +8,8 @@
     {stripslashes($customer.fullname)}<br>
     {stripslashes($customer.email)}<br>
     <br>
+    <a href="{$BASE_URL}pages/manager/customers/edit_customer.php?id={$customer.frequent_customerid}">Editar</a>  
+    <br>
     <a href="{$BASE_URL}actions/manager/customers/action_delete_customer.php?id={$customer.frequent_customerid}">Remover</a>  
   </div>
 </div>

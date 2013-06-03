@@ -79,7 +79,13 @@ div>div.picture-column {
   margin-right:20px;
 }
 
+fieldset>div>img{
+	padding: 5px;
+	min-width: 100px;
+	max-width: 400px;
+}
+
 div>div.picture-column>img {
-  min-width: 100px;
+  	min-width: 100px;
 	max-width: 400px;
 }

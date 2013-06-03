@@ -28,8 +28,9 @@
       <textarea name='description' id='description'>{stripslashes($product['description'])}</textarea>
     </div>
     <div>
-      <label for="image">Imagem:</label>
-      <img src="{if ($product.picture!='')}data:image/jpeg;base64, {$product.picture}{else}{$BASE_URL}img/img-not-available.png{/if}">   
+      <img src="{if ($product.picture!='')}data:image/jpeg;base64, {$product.picture}{else}{$BASE_URL}img/img-not-available.png{/if}">
+      <br>
+      <label for="image">Alterar magem:</label>       
       <div class="input-file"><input type="file" name="image" id="image"></div>
       <p class="tip">Apenas formato *.jpg ou *.jpeg e tamanho maximo de 1 MByte</p>
     </div>
