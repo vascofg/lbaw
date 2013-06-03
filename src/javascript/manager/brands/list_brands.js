@@ -19,7 +19,7 @@ function getBrands(page, first){
 					else
           {
 						for(var i in brands)
-							tablebody.append('<tr><td width="70%">'+stripslashes(brands[i].name)+'</td><td width="10%">'+brands[i].usage+'</td><td width="10%">'+(brands[i].usage==0?('<a href="../../../actions/manager/brands/action_delete_brand.php?id='+brands[i].brandid+'">'):'')+'<i class="icon-remove"></i>'+(brands[i].usage==0?'</a>':'')+'</td><td width="10%"><a href="{$BASE_URL}pages/manager/brands/edit_brand.php?id='+brands[i].brandid+'"><i class="icon-edit"></i></a></tr>');
+							tablebody.append('<tr><td width="70%">'+stripslashes(brands[i].name)+'</td><td width="10%">'+brands[i].usage+'</td><td width="10%">'+(brands[i].usage==0?('<a href="../../../actions/manager/brands/action_delete_brand.php?id='+brands[i].brandid+'">'):'')+'<i class="icon-remove"></i>'+(brands[i].usage==0?'</a>':'')+'</td><td width="10%"><a href="edit_brand.php?id='+brands[i].brandid+'"><i class="icon-edit"></i></a></tr>');
           }
           if(first)
           {
