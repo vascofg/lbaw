@@ -27,8 +27,20 @@
 	{/foreach}
 	</tbody>
 	<tfoot>
+    <tr style="display:none;">
+			<td colspan="5"><span class="customer_card_balance"></span></td>
+		</tr>
 		<tr>
 			<td colspan="5" style="font-weight:bold;">Subtotal: <span class="subtotal">{$sum}€</span></td>
+		</tr>
+    <tr style="display:none;">
+			<td colspan="5" style="font-weight:bold;">Cartão cliente: <span class="customer_card">0€</span></td>
+		</tr>
+    <tr style="display:none;">
+			<td colspan="5" style="font-weight:bold;">Cartão: <span class="card">0€</span></td>
+		</tr>
+    <tr style="display:none;">
+			<td colspan="5" style="font-weight:bold;">Dinheiro: <span class="cash">0€</span></td>
 		</tr>
 		<tr>
 			<td colspan="5" style="font-weight:bold;">Total: <span class="total">{$sum}€</span></td>
@@ -38,21 +50,21 @@
 <button type="button" class="ink-button success submit ink-vspace" id="submit" disabled>Finalizar compra</button>
 </form>
 <br>
-<div class="ink-container" style="background-color:#ddd; padding:20px;">
+<div class="ink-container" style="background-color:#ddd; padding:20px; width:auto;">
 	<div class="ink-l33">
 		<label for="customercard_number">Nº cartão cliente:</label><br>
-		<input type='text' name='customercard_number'><span class='customercard_balance'></span><br>
-		<label for="customercard_value">Valor em Cartão cliente:</label><br>
+		<input type='text' name='customercard_number'><br><br>
+		<label for="customercard_value">Valor em cartão cliente:</label><br>
 		<input type='text' name='customercard_value' disabled><br>
 	</div>
 	<div class="ink-l33">
 		<label for="card_number">Nº cartão pagamento:</label><br>
-		<input type='text' name='card_number' disabled><br>
-		<label for="card_value">Valor em Cartão:</label><br>
+		<input type='text' name='card_number' disabled><br><br>
+		<label for="card_value">Valor em cartão de pagamento:</label><br>
 		<input type='text' name='card_value'><br>
 	</div>
 	<div class="ink-l33">
-		<label for="cash_value">Dinheiro:</label><br>
+		<label for="cash_value">Valor em dinheiro:</label><br>
 		<input type='text' name='cash_value'><br>
 	</div>
 </div>
