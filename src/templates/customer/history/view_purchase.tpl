@@ -33,4 +33,5 @@
     </tfoot>
   {/if}
 </table>
+<a href="list_purchases.php"><button class="ink-button ink-vspace">Voltar</button></a>
 {include file="customer/footer.tpl"}

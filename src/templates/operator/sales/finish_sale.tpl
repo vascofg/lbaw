@@ -47,7 +47,6 @@
 		</tr>
 	</tfoot>
 </table>
-<button type="button" class="ink-button success submit ink-vspace" id="submit" disabled>Finalizar compra</button>
 </form>
 <br>
 <div class="ink-container" style="background-color:#ddd; padding:20px; width:auto;">
@@ -68,6 +67,7 @@
 		<input type='text' name='cash_value'><br>
 	</div>
 </div>
+<a href="./"><button class="ink-button caution ink-vspace">Cancelar</button></a><button type="button" class="ink-button success submit ink-vspace" id="submit" disabled>Finalizar compra</button>
 
 {include file="operator/footer.tpl"}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
