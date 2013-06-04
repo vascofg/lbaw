@@ -15,11 +15,11 @@
 </head>
 <body>
 <header class="ink-container">
-	<h1>POS - Operador</h1>
+	<h1>POS - Cliente</h1>
 	<nav class="ink-navigation ink-collapsible">
 		<ul class="menu horizontal blue">
 			<li><a href='{$BASE_URL}'>Home externa</a></li>
-      {if isLoggedInOperator()}
+      {if isLoggedInCustomer()}
         <li class="{if $active=="home"}active{/if}"><a href='{$BASE_URL}pages/customer'><i class="icon-home"></i></a></li>
         <li><a href='{$BASE_URL}actions/customer/auth/action_logout.php'>Logout</a></li>
       {/if}

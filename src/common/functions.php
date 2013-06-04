@@ -23,6 +23,10 @@
 		return isset($_SESSION['operator']['username']);
 	}
 	
+	function isLoggedInCustomer() {
+		return isset($_SESSION['customer']['username']);
+	}
+	
 	//Define redirect funtion
 	function redirect($page) {
 		global $BASE_URL;

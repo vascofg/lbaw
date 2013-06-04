@@ -2,7 +2,7 @@
 	// initialize
   include_once('../../../common/init.php');
 
-  if (isLoggedInOperator())
+  if (isLoggedInCustomer())
 	redirect('pages/customer');
 
   else {
