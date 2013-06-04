@@ -50,7 +50,7 @@
     if(empty($description))
       $description = null;
       try{
-       if(!empty($image)){
+       if($image !== ""){
           $stmt = $db->prepare("UPDATE product SET name=:name, price=:price, quantity=:quantity, brandid=:brandid, description=:description, picture=:picture WHERE productid=:id");
           $stmt->execute(array(name=>$name,price=>$price,quantity=>$quantity,brandid=>$brandid,description=>$description,picture=>$image,id=>$id));
        }else{

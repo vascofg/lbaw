@@ -30,9 +30,16 @@
     <div>
       <img src="{if ($product.picture!='')}data:image/jpeg;base64, {$product.picture}{else}{$BASE_URL}img/img-not-available.png{/if}">
       <br>
+      <div>
+      <label for="delete-image">Apagar foto</label>
+          <input type="checkbox" name="delete-image" id="delete-image">
+        </div>
+        <br>
+        <div>
       <label for="image">Alterar magem:</label>       
       <div class="input-file"><input type="file" name="image" id="image"></div>
       <p class="tip">Apenas formato *.jpg ou *.jpeg e tamanho maximo de 1 MByte</p>
+      </div>
     </div>
     <input type="hidden" name="id" value="{$product['productid']}"></input>
   </fieldset>

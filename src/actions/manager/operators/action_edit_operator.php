@@ -18,7 +18,8 @@
 		$image = "";
 		if (($_FILES["image"]["type"] == "image/jpeg" || $_FILES["image"]["type"] == "image/jpg") && $_FILES["image"]["size"] < $maxfilesize)
 			$image = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
-		
+		elseif(isset($_POST['delete-image']))
+			$image = null;
 		if(!empty($username)&&!empty($fullname)&&!empty($email))
 		{
 			if(empty($password))

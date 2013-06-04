@@ -85,7 +85,7 @@
   function editManager($username,$fullname,$email,$image,$id) {
     global $db;   
     try {
-      if(empty($image)){
+      if($image === ""){
         $stmt = $db->prepare("UPDATE system_manager SET username=:username, fullname=:fullname,email=:email WHERE system_managerid=:id");
         $stmt->execute(array(username=>$username,fullname=>$fullname,email=>$email,id=>$id));
       }
@@ -103,7 +103,7 @@
   function editManagerWithPassword($username,$password,$fullname,$email,$image,$id) {
     global $db;   
     try {
-      if(empty($image)){
+      if($image === ""){
         $stmt = $db->prepare("UPDATE system_manager SET username=:username, password=:password,fullname=:fullname,email=:email WHERE system_managerid=:id");
         $stmt->execute(array(username=>$username,password=>$password,fullname=>$fullname,email=>$email,id=>$id));
       }
