@@ -50,21 +50,25 @@
 </form>
 <br>
 <div class="ink-container sale_controls">
-	<div class="ink-l33">
-		<label for="customercard_number">Nº cartão cliente:</label><br>
-		<input type='text' name='customercard_number'><br><br>
-		<label for="customercard_value">Valor em cartão cliente:</label><br>
-		<input type='text' name='customercard_value' disabled><br>
+	<div class="ink-l30 ink-m30 ink-s100" style="">
+    <div>
+      <span>Cartão Cliente</span>
+      <input type='text' name='customercard_number' placeholder="Número do cartão">
+      <input type='text' name='customercard_value' placeholder="Valor a pagar" disabled>
+    </div>
 	</div>
-	<div class="ink-l33">
-		<label for="card_number">Nº cartão pagamento:</label><br>
-		<input type='text' name='card_number' disabled><br><br>
-		<label for="card_value">Valor em cartão de pagamento:</label><br>
-		<input type='text' name='card_value'><br>
+	<div class="ink-l30 ink-m30 ink-s100" style="margin-left:5%;">
+    <div>
+      <span>Cartão Débito / Crédito</span>
+      <input type='text' name='card_number' placeholder="Número do cartão" disabled>
+      <input type='text' name='card_value' placeholder="Valor a pagar">
+    </div>
 	</div>
-	<div class="ink-l33">
-		<label for="cash_value">Valor em dinheiro:</label><br>
-		<input type='text' name='cash_value'><br>
+	<div class="ink-l30 ink-m30 ink-s100" style="margin-left:5%;">
+    <div>
+      <span>Dinheiro</span>
+      <input type='text' name='cash_value' placeholder="Valor a pagar">
+    </div>
 	</div>
 </div>
 <a href="./"><button class="ink-button caution ink-vspace">Cancelar</button></a><button type="button" class="ink-button success submit ink-vspace" id="submit" disabled>Finalizar compra</button>
