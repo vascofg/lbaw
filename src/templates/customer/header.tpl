@@ -21,6 +21,7 @@
 			<li><a href='{$BASE_URL}'>Home externa</a></li>
       {if isLoggedInCustomer()}
         <li class="{if $active=="home"}active{/if}"><a href='{$BASE_URL}pages/customer'><i class="icon-home"></i></a></li>
+        <li class="{if $active=="history"}active{/if}"><a href='{$BASE_URL}pages/customer/history/list_purchases.php'>Histórico</a></li>
         <li><a href='{$BASE_URL}actions/customer/auth/action_logout.php'>Logout</a></li>
       {/if}
     </ul>
