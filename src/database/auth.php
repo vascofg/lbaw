@@ -20,6 +20,18 @@
     else
     	return (0);
   }
+  
+  // Check Customer Login
+  function checkLoginCustomer($username,$password) {
+    global $db;
+    $stmt = $db->prepare("SELECT frequent_customerid FROM frequent_customer where username = :username and password = :password");
+    $stmt->execute(array($username,$password));
+		$result = $stmt->fetch(PDO::FETCH_NUM);
+		if($result)
+    	return ($result[0]);
+    else
+    	return (0);
+  }
 
     // Get all Managers
   function getAllManagers() {
