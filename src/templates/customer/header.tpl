@@ -22,7 +22,7 @@
       {if isLoggedInCustomer()}
         <li class="{if $active=="home"}active{/if}"><a href='{$BASE_URL}pages/customer'><i class="icon-home"></i></a></li>
         <li class="{if $active=="history"}active{/if}"><a href='{$BASE_URL}pages/customer/history/list_purchases.php'>Histórico</a></li>
-        <li><a href='{$BASE_URL}actions/customer/auth/action_logout.php'>Logout</a></li>
+        <li style="float:right;"><a href='{$BASE_URL}actions/customer/auth/action_logout.php'><span style="font-weight:bold;">{$smarty.session.customer.username}</span>&nbsp;&nbsp;&nbsp;Logout</a></li>
       {/if}
     </ul>
   </nav>

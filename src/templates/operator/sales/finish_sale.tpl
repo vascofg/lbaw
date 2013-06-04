@@ -6,7 +6,7 @@
 			<th>Quantidade</th>
 			<th>Marca</th>
 			<th>Produto</th>
-			<th>Preço unidade</th>
+			<th>Preço unitário</th>
 			<th>Preço</th>
 		</tr>
 	</thead>
@@ -28,7 +28,7 @@
 	</tbody>
 	<tfoot>
     <tr style="display:none;">
-			<td colspan="5"><span class="customer_card_balance"></span></td>
+			<td colspan="5" class="customer_card_balance"><span class="customer_card_balance"></span></td>
 		</tr>
 		<tr>
 			<td colspan="5" style="font-weight:bold;">Subtotal: <span class="subtotal">{$sum}€</span></td>

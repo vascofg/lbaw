@@ -25,7 +25,7 @@ $("input[name='customercard_value']").keyup(function(e) {
     $(this).blur();
 		if($(this).val()<0 || !$(this).val())
 			$(this).val(0);
-    var customercard_balance = parseFloat($("span.customercard_balance").html());
+    var customercard_balance = parseFloat($("td.customer_card_balance>span.customer_card_balance").html());
 		if(parseFloat($(this).val())>customercard_balance)
 			$(this).val(customercard_balance.toFixed(2));
 		var otherVals = 
@@ -151,12 +151,13 @@ $("input[name='cash_value']").keyup(function(e) {
 
 function getCustomerCardBalance(number)
 {
-  var customercard_balanceElem = $("td>span.customer_card_balance");
+  var customercard_balancetd = $("td.customer_card_balance");
+  var customercard_balancevalue;
 	if(!number)
 	{
 		$("input[name='customercard_value']").val(0);
 		$("input[name='customercard_value']").prop('disabled',true);
-		customercard_balanceElem.parent().parent().hide();
+		customercard_balancetd.parent().hide();
 		customercard_number=-1;
 	}
 	else
@@ -169,14 +170,16 @@ function getCustomerCardBalance(number)
 			 		if(output==-1)
 			 		{
 			 			customercard_number=-1;
-			 			customercard_balanceElem.html('Cartão inexistente').parent().parent().show();
+			 			customercard_balancetd.html('Cartão inexistente').parent().parent().show();
 			 			$("input[name='customercard_value']").val(0);
 			 			$("input[name='customercard_value']").prop('disabled',true);
 			 		}
 			 		else
 			 		{
 			 			customercard_number = number;
-			 			$("td>span.customer_card_balance").html("Saldo do cartão cliente: "+output+'€').parent().parent().show();
+			 			customercard_balancetd.html("Saldo do cartão cliente: <span class=\"customer_card_balance\"></span>");
+            customercard_balancevalue = customercard_balancetd.children("span.customer_card_balance");
+            customercard_balancevalue.html(output+'€').parent().parent().show();
 			 			$("input[name='customercard_value']").prop('disabled',false);
 			 		}
 			 }

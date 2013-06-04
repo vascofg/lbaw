@@ -1,7 +1,6 @@
 {include file="customer/header.tpl" active="history"}
-{assign var="total" value=0}
 <h4>Compra nº {$products[0]['saleid']}</h4>
-<table class="ink-table ink-bordered ink-hover products">
+<table class="ink-table ink-bordered products">
   <thead>
     <tr>
 	    <th>Quantidade</th>
@@ -15,22 +14,21 @@
 {foreach $products as $product}
   <tr>
     <td>{$product['quantity']}</td>
-    <td>{$product['brandname']}</td>
-    <td>{$product['name']}</td>
+    <td>{if isset($product['brandname'])}{$product['brandname']}{else}<span style="font-style:italic;">Eliminado</span>{/if}</td>
+    <td>{if isset($product['name'])}{$product['name']}{else}<span style="font-style:italic;">Eliminado</span>{/if}</td>
     <td>{$product['price']}€</td>
-    <td>{$product['total']}€</td>
+    <td>{$product['product_total']}€</td>
   </tr>
-  {assign var="total" value=$total+$product['total']}
 {foreachelse}
   <tr>
     <td colspan="5">Sem resultados...</td>
   </tr>
 {/foreach}
   </tbody>
-  {if $total > 0}
+  {if isset($products[0]['total'])}
     <tfoot>
       <tr>
-        <td colspan = 5 style="font-weight:bold">Total: {$total}</td>
+        <td colspan = 5 style="font-weight:bold">Total: {$products[0]['total']}€</td>
       </tr>
     </tfoot>
   {/if}
