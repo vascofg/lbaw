@@ -63,3 +63,10 @@ div.cart>form>div.total {
 .hide-all { /*Required by pagination*/
                 display: none;
 }
+
+div.sale_controls {
+  background-color:#ddd;
+  padding:20px !important;
+  width:auto !important;
+  border-radius:5px !important;
+}

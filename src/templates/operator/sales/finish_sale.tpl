@@ -49,7 +49,7 @@
 </table>
 </form>
 <br>
-<div class="ink-container" style="background-color:#ddd; padding:20px; width:auto;">
+<div class="ink-container sale_controls">
 	<div class="ink-l33">
 		<label for="customercard_number">Nº cartão cliente:</label><br>
 		<input type='text' name='customercard_number'><br><br>
