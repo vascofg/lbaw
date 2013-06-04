@@ -1,4 +1,4 @@
-{include file="manager/header.tpl" active="brand"}
+{include file="manager/header.tpl" active="brands"}
 <form  method="post" action="{$BASE_URL}actions/manager/brands/action_edit_brand.php" class="ink-form block" onsubmit="return SAPO.Ink.FormValidator.validate(this);">
   <fieldset>
     <div class="control required">
