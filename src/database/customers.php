@@ -53,7 +53,7 @@
     global $db;
 
     try {
-      if(empty($image)){
+      if($image === ""){
         $stmt = $db->prepare("UPDATE frequent_customer SET username=:username,password=:password,fullname=:fullname,email=:email WHERE frequent_customerid=:id");
         $stmt->execute(array(username=>$username,password=>$password,fullname=>$fullname,email=>$email,id=>$id));
       }
@@ -72,7 +72,7 @@
     global $db;
 
     try {
-      if(empty($image)){
+      if($image === ""){
         $stmt = $db->prepare("UPDATE frequent_customer SET username=:username,fullname=:fullname,email=:email WHERE frequent_customerid=:id");
         $stmt->execute(array(username=>$username,fullname=>$fullname,email=>$email,id=>$id));
       }

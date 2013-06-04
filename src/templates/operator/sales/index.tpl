@@ -1,7 +1,7 @@
 {include file="operator/header.tpl" active="sales"}
 {include file="search.tpl"}
 <div class="ink-l70">
-	<h4>Productos</h4>
+	<h4>Produtos</h4>
 	<div class="products">
 	{foreach $products as $product}
 	<div class="product" id="{$product.productid}" data-quantity="{$product.quantity}"><span class="picture"><img src="{if ($product.picture!='')}data:image/jpeg;base64, {$product.picture}{else}{$BASE_URL}img/img-not-available.png{/if}"><br></span><span class="brandname">{stripslashes($product.brandname)}</span> <span class="name">{stripslashes($product.name)}</span><br><span class="price">{$product.price}€</span></div>

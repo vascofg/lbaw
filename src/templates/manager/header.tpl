@@ -46,7 +46,7 @@
             <li><a href='{$BASE_URL}pages/manager/auth/register.php'>Novo Gestor</a></li>
           </ul>
         </li>
-			  <li><a href='{$BASE_URL}actions/manager/auth/action_logout.php'>Logout</a></li>
+			  <li><a href='{$BASE_URL}actions/manager/auth/action_logout.php'>{$smarty.session.admin.username} Logout</a></li>
       {/if}
 		</ul>
 	</nav>
