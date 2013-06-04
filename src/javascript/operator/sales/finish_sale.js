@@ -33,11 +33,11 @@ $("input[name='customercard_value']").keyup(function(e) {
     var total = parseFloat($("span.total").html());
     var subtotalElem = $("span.subtotal");
 		if(total-(parseFloat($(this).val())+otherVals)>0)
-			subtotalElem.html((total-(parseFloat($(this).val())+otherVals)).toFixed(2));
+			subtotalElem.html((total-(parseFloat($(this).val())+otherVals)).toFixed(2)+'€');
 		else
 		{
 			$(this).val((total-otherVals).toFixed(2));
-			subtotalElem.html(0);
+			subtotalElem.html(0+'€');
 		}
     var submitButton = document.getElementById("submit");
     var subtotal = parseFloat(subtotalElem.html());
@@ -67,11 +67,11 @@ $("input[name='card_value']").keyup(function(e) {
     var total = parseFloat($("span.total").html());
     var subtotalElem = $("span.subtotal");
 		if(total-(parseFloat($(this).val())+otherVals)>0)
-			subtotalElem.html((total-(parseFloat($(this).val())+otherVals)).toFixed(2));
+			subtotalElem.html((total-(parseFloat($(this).val())+otherVals)).toFixed(2)+'€');
 		else
 		{
 			$(this).val((total-otherVals).toFixed(2));
-			subtotalElem.html(0);
+			subtotalElem.html(0+'€');
 		}
     var submitButton = document.getElementById("submit");
     var subtotal = parseFloat(subtotalElem.html());
@@ -104,11 +104,11 @@ $("input[name='cash_value']").keyup(function(e) {
     var total = parseFloat($("span.total").html());
     var subtotalElem = $("span.subtotal");
 		if(total-(parseFloat($(this).val())+otherVals)>0)
-			subtotalElem.html((total-(parseFloat($(this).val())+otherVals)).toFixed(2));
+			subtotalElem.html((total-(parseFloat($(this).val())+otherVals)).toFixed(2)+'€');
 		else
 		{
 			$(this).val((total-otherVals).toFixed(2));
-			subtotalElem.html(0);
+			subtotalElem.html(0+'€');
 		}
     var submitButton = document.getElementById("submit");
     var subtotal = parseFloat(subtotalElem.html());

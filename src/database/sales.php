@@ -69,9 +69,18 @@
 	{
 		global $db;
 		$userID = $_SESSION['customer']['id'];
-		$stmt = $db->prepare("select brand.name as brandname, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity, joinsaletoproduct.price*joinsaletoproduct.quantity as total, sale.date from sale left join joinsaletoproduct on (sale.saleid = joinsaletoproduct.saleid) left join product on (joinsaletoproduct.productid = product.productid) left join payment on (sale.saleid = payment.saleid) left join brand on (brand.brandid = product.brandid) where payment.customer_cardid = :id group by joinsaletoproduct.productid, brand.name, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity order by sale.saleid DESC, product.name");
+		//$stmt = $db->prepare("select brand.name as brandname, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity, joinsaletoproduct.price*joinsaletoproduct.quantity as total, sale.date from sale left join joinsaletoproduct on (sale.saleid = joinsaletoproduct.saleid) left join product on (joinsaletoproduct.productid = product.productid) left join payment on (sale.saleid = payment.saleid) left join brand on (brand.brandid = product.brandid) where payment.customer_cardid = :id group by joinsaletoproduct.productid, brand.name, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity order by sale.saleid DESC, product.name");
+		$stmt = $db->prepare("select sale.saleid, sale.date from sale left join payment on (sale.saleid = payment.saleid) where payment.customer_cardid = :id group by sale.saleid ORDER BY sale.saleid DESC");
 	  $stmt->execute(array(id=>$userID));
 		return $stmt->fetchAll();
 	}
 	
+	function getSaleByID($saleid)
+	{
+		global $db;
+		$userID = $_SESSION['customer']['id'];
+		$stmt = $db->prepare("select brand.name as brandname, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity, joinsaletoproduct.price*joinsaletoproduct.quantity as total, sale.date from sale left join joinsaletoproduct on (sale.saleid = joinsaletoproduct.saleid) left join product on (joinsaletoproduct.productid = product.productid) left join payment on (sale.saleid = payment.saleid) left join brand on (brand.brandid = product.brandid) where sale.saleid = :id and payment.customer_cardid = :userid group by joinsaletoproduct.productid, brand.name, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity order by product.name");
+	  $stmt->execute(array(id=>$saleid, userid=>$userID));
+		return $stmt->fetchAll();
+	}
 ?>
