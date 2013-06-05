@@ -3,7 +3,7 @@
 <head>
 <meta charset='utf-8'>
 <title>POS - Cliente</title>
-<link href='{$BASE_URL}css/customer.css' rel="stylesheet" type="text/css">
+<!--<link href='{$BASE_URL}css/customer.css' rel="stylesheet" type="text/css">-->
 <!-- INK -->
 <!-- Stylesheets -->
 <link rel="stylesheet" href="{$BASE_URL}lib/ink/css/ink.css">
@@ -22,6 +22,7 @@
       {if isLoggedInCustomer()}
         <li class="{if $active=="home"}active{/if}"><a href='{$BASE_URL}pages/customer'><i class="icon-home"></i></a></li>
         <li class="{if $active=="history"}active{/if}"><a href='{$BASE_URL}pages/customer/history/list_purchases.php'>Histórico</a></li>
+        <li class="{if $active=="stats"}active{/if}"><a href='{$BASE_URL}pages/customer/stats/view_stats.php'>Estatísticas</a></li>
         <li style="float:right;"><a href='{$BASE_URL}actions/customer/auth/action_logout.php'><span style="font-weight:bold;">{$smarty.session.customer.username}</span>&nbsp;&nbsp;&nbsp;Logout</a></li>
       {/if}
     </ul>

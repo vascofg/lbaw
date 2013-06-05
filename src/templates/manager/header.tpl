@@ -46,6 +46,7 @@
             <li><a href='{$BASE_URL}pages/manager/auth/register.php'>Novo Gestor</a></li>
           </ul>
         </li>
+       	<li class="{if $active=="stats"}active{/if}"><a href='{$BASE_URL}pages/manager/stats/view_stats.php'>Estatísticas</a></li>
 			  <li style="float:right;"><a href='{$BASE_URL}actions/manager/auth/action_logout.php'><span style="font-weight:bold;">{$smarty.session.admin.username}</span>&nbsp;&nbsp;&nbsp;Logout</a></li>
       {/if}
 		</ul>

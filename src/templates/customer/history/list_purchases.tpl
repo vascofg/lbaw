@@ -11,7 +11,7 @@
 {foreach $purchases as $purchase}
 		<tr>
       <td><a href="view_purchase.php?id={$purchase['saleid']}">{$purchase['saleid']}</a></td>
-      <td>{strtotime($purchase['date'])|date_format:"%d/%m/%Y %H:%M"}</td>
+      <td>{$purchase['date']|date_format:"%d/%m/%Y %H:%M"}</td>
       <td>{$purchase['total']}€</td>
     </tr>
 {foreachelse}

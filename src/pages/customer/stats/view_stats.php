@@ -5,8 +5,7 @@
       redirect("pages/customer/auth/login.php");
     else {
     	include_once($BASE_PATH . 'database/sales.php');
-    	$purchases = getCustomerSales($_SESSION['customer']['id']);
-    	$smarty->assign('purchases',$purchases);
-      $smarty->display("customer/history/list_purchases.tpl");
+    	$smarty->assign('graph',getCustomerSalesGraph($_SESSION['customer']['id']));
+      $smarty->display("customer/stats/view_stats.tpl");
     }
 ?>

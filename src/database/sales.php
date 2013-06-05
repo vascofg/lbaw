@@ -65,12 +65,29 @@
     	return (-1);
 	}
 	
-	function getCustomerSales()
+	function getCustomerSales($userID)
 	{
 		global $db;
-		$userID = $_SESSION['customer']['id'];
-		$stmt = $db->prepare("select sale.saleid, sale.date, sum(payment.ammount) as total from sale left join payment on (sale.saleid = payment.saleid) where payment.customer_cardid = :id group by sale.saleid ORDER BY sale.saleid DESC");
+		if(!$userID)
+			$userID = $_SESSION['customer']['id'];
+		$stmt = $db->prepare("select sale.saleid, extract(epoch from date_trunc('minute',sale.date)) as date, sum(payment.ammount) as total from sale left join payment on (sale.saleid = payment.saleid) where payment.customer_cardid = :id group by sale.saleid ORDER BY sale.saleid DESC");
 	  $stmt->execute(array(id=>$userID));
+		return $stmt->fetchAll();
+	}
+	
+	function getOperatorSales($userID)
+	{
+		global $db;
+		$stmt = $db->prepare("select sale.saleid, extract(epoch from date_trunc('minute',sale.date)) as date, sum(payment.ammount) as total from sale left join payment on (sale.saleid = payment.saleid) where sale.pos_operatorid = :id group by sale.saleid ORDER BY sale.saleid DESC");
+	  $stmt->execute(array(id=>$userID));
+		return $stmt->fetchAll();
+	}
+	
+	function getAllSales()
+	{
+		global $db;
+		$stmt = $db->prepare("select sale.saleid, extract(epoch from date_trunc('minute',sale.date)) as date, sum(payment.ammount) as total from sale left join payment on (sale.saleid = payment.saleid) group by sale.saleid ORDER BY sale.saleid DESC");
+	  $stmt->execute();
 		return $stmt->fetchAll();
 	}
 	
@@ -78,8 +95,26 @@
 	{
 		global $db;
 		$userID = $_SESSION['customer']['id'];
-		$stmt = $db->prepare("select brand.name as brandname, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity, joinsaletoproduct.price*joinsaletoproduct.quantity as product_total, sum(payment.ammount) as total, sale.date from sale left join joinsaletoproduct on (sale.saleid = joinsaletoproduct.saleid) left join product on (joinsaletoproduct.productid = product.productid) left join payment on (sale.saleid = payment.saleid) left join brand on (brand.brandid = product.brandid) where sale.saleid = :saleid and payment.customer_cardid = :userid group by joinsaletoproduct.productid, brand.name, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity order by brand.name, product.name");
+		$stmt = $db->prepare("select brand.name as brandname, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity, joinsaletoproduct.price*joinsaletoproduct.quantity as product_total, sum(payment.ammount) as total from sale left join joinsaletoproduct on (sale.saleid = joinsaletoproduct.saleid) left join product on (joinsaletoproduct.productid = product.productid) left join payment on (sale.saleid = payment.saleid) left join brand on (brand.brandid = product.brandid) where sale.saleid = :saleid and payment.customer_cardid = :userid group by joinsaletoproduct.productid, brand.name, product.name, sale.saleid, joinsaletoproduct.price, joinsaletoproduct.quantity order by brand.name, product.name");
 	  $stmt->execute(array(saleid=>$saleid, userid=>$userID));
 		return $stmt->fetchAll();
+	}
+	
+	function getCustomerSalesGraph($id)
+	{
+		$sales = getCustomerSales($id);
+		return json_encode(array(width=>800,height=>400,padding=>array(top=>10,left=>100,bottom=>20,right=>10),data=>array(array(name=>"table",values=>$sales)),scales=>array(array(name=>"x", type=>"ordinal", range=>"width", domain=>array(data=>"table", field=>"data.saleid")),array(name=>"y", range=>"height", domain=>array(data=>"table", field=>"data.total"))),axes=>array(array(type=>"x", scale=>"x"),array(type=>"y", scale=>"y")), marks=>array(array(type=>"rect", from=> array(data=>"table"), properties=>array(enter=>array(x=>array(scale=>"x", field=>"data.saleid"), width=>array(scale=>"x", band=>true, offset=>-1), y=>array(scale=>"y", field=>"data.total"), y2=>array(scale=>"y", value=>0)), update=>array(fill=>array(value=>"#156ba1")), hover=>array(fill=>array(value=>"#1b88ce")))))));
+	}
+	
+	function getOperatorSalesGraph($id)
+	{
+		$sales = getOperatorSales($id);
+		return json_encode(array(width=>800,height=>400,padding=>array(top=>10,left=>100,bottom=>20,right=>10),data=>array(array(name=>"table",values=>$sales)),scales=>array(array(name=>"x", type=>"ordinal", range=>"width", domain=>array(data=>"table", field=>"data.saleid")),array(name=>"y", range=>"height", domain=>array(data=>"table", field=>"data.total"))),axes=>array(array(type=>"x", scale=>"x"),array(type=>"y", scale=>"y")), marks=>array(array(type=>"rect", from=> array(data=>"table"), properties=>array(enter=>array(x=>array(scale=>"x", field=>"data.saleid"), width=>array(scale=>"x", band=>true, offset=>-1), y=>array(scale=>"y", field=>"data.total"), y2=>array(scale=>"y", value=>0)), update=>array(fill=>array(value=>"#156ba1")), hover=>array(fill=>array(value=>"#1b88ce")))))));
+	}
+	
+	function getAllSalesGraph()
+	{
+		$sales = getAllSales();
+		return json_encode(array(width=>800,height=>400,padding=>array(top=>10,left=>100,bottom=>20,right=>10),data=>array(array(name=>"table",values=>$sales)),scales=>array(array(name=>"x", type=>"ordinal", range=>"width", domain=>array(data=>"table", field=>"data.saleid")),array(name=>"y", range=>"height", domain=>array(data=>"table", field=>"data.total"))),axes=>array(array(type=>"x", scale=>"x"),array(type=>"y", scale=>"y")), marks=>array(array(type=>"rect", from=> array(data=>"table"), properties=>array(enter=>array(x=>array(scale=>"x", field=>"data.saleid"), width=>array(scale=>"x", band=>true, offset=>-1), y=>array(scale=>"y", field=>"data.total"), y2=>array(scale=>"y", value=>0)), update=>array(fill=>array(value=>"#156ba1")), hover=>array(fill=>array(value=>"#1b88ce")))))));
 	}
 ?>

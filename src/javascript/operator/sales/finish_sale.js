@@ -5,7 +5,7 @@ var card_value = -1;
 var cash_value = -1;
 
 $('button#submit').click(function (evt) {
-    $(this).append('<input type="hidden" name="customercard_number" value="'+customercard_number+'">\
+    $("form#form").append('<input type="hidden" name="customercard_number" value="'+customercard_number+'">\
     <input type="hidden" name="customercard_value" value="'+customercard_value+'">\
     <input type="hidden" name="card_number" value="'+parseInt($("input[name='card_number']").val())+'">\
     <input type="hidden" name="card_value" value="'+card_value+'">\
