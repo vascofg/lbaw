@@ -1,7 +1,7 @@
 <?php
     // initialize
     include_once('../../../common/init.php');
-    if(!isLoggedInCustomer())
+    if(!isLoggedInAdmin())
       redirect("pages/manager/auth/login.php");
     else {
     	include_once($BASE_PATH . 'database/sales.php');
